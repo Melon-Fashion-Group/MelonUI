@@ -6,4 +6,4 @@ MelonUI is a framework with a set of UI components for rapid prototyping and app
 
 ### License
 
-##### `📃: MelonKit · Melon Fashion Group® · 2024`
+##### `📃: MelonUI · Melon Fashion Group® · 2024`
