@@ -31,7 +31,7 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/Melon-Fashion-Group/MelonKit", from: "0.20.0")
+        .package(url: "https://github.com/Melon-Fashion-Group/MelonKit", from: "0.22.2")
     ],
     targets: [
         .target(
