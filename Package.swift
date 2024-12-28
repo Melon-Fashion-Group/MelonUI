@@ -30,8 +30,16 @@ let package = Package(
             targets: ["MelonUI"]
         )
     ],
+    dependencies: [
+        .package(url: "https://github.com/Melon-Fashion-Group/MelonKit", from: "0.20.0")
+    ],
     targets: [
-        .target(name: "MelonUI")
+        .target(
+            name: "MelonUI",
+            dependencies: [
+                .product(name: "MelonKit", package: "MelonKit")
+            ]
+        )
     ],
     swiftLanguageModes: [.v6]
 )
