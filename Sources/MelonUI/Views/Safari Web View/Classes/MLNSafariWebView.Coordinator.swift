@@ -21,9 +21,9 @@ extension MLNSafariWebView {
     ///
     ///
     @MainActor public final class Coordinator: NSObject, @preconcurrency SFSafariViewControllerDelegate {
-        private let action: Action
+        private let action: Action?
 
-        init(action: @escaping Action) {
+        init(action: Action?) {
             self.action = action
         }
 
@@ -35,7 +35,7 @@ extension MLNSafariWebView {
         ///
         ///
         public func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
-            action()
+            action?()
         }
     }
 }

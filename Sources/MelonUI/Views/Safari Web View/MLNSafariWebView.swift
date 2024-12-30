@@ -34,7 +34,7 @@ public struct MLNSafariWebView: UIViewControllerRepresentable {
     // MARK: - Private properties
 
     private let url: URL
-    private let action: Action
+    private let action: Action?
 
 
 
@@ -45,7 +45,7 @@ public struct MLNSafariWebView: UIViewControllerRepresentable {
     ///
     public init(
         url: URL,
-        completion action: @escaping Action
+        completion action: Action? = nil
     ) {
         self.url = url
         self.action = action
