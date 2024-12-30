@@ -55,15 +55,18 @@ public struct MLNSafariWebView: UIViewControllerRepresentable {
     ///
     ///
     ///
-    public func makeUIViewController(context: Context) -> SFSafariViewController {
+    public func makeUIViewController(context: Context) -> UINavigationController {
         let safariVC = SFSafariViewController(url: url)
         safariVC.delegate = context.coordinator
 
-        return safariVC
+        let navigationVC = UINavigationController(rootViewController: safariVC)
+        navigationVC.setNavigationBarHidden(true, animated: false)
+
+        return navigationVC
     }
 
     ///
     ///
     ///
-    public func updateUIViewController(_ uiViewController: SFSafariViewController, context: Context) { }
+    public func updateUIViewController(_ uiViewController: UINavigationController, context: Context) { }
 }
