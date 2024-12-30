@@ -32,7 +32,10 @@ public struct MLNStack: View {
 
     public var body: some View {
         NavigationStack(path: $store.views) {
-
+            if let rootView = store.views.first {
+                rootView.view
+                    .navigationDestination(for: MLNStackView.self) { $0.view }
+            }
         }
     }
 
