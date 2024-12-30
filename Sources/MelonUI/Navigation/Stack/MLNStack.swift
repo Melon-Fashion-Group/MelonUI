@@ -31,10 +31,11 @@ public struct MLNStack: View {
     // MARK: - Body
 
     public var body: some View {
-        NavigationStack(path: $store.views) {
-            if let rootView = store.views.first {
-                rootView.view
-                    .navigationDestination(for: MLNStackView.self) { $0.view }
+        NavigationStack(path: $store.items) {
+            if let rootView = store.rootItem?.view {
+                rootView
+                    .toolbar(.hidden, for: .navigationBar)
+                    .navigationDestination(for: MLNStackItem.self) { $0.view }
             }
         }
     }
