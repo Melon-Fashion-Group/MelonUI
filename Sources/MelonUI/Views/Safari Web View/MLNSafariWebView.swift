@@ -22,15 +22,19 @@ import SwiftUI
 @available(iOS 16.0, *)
 public struct MLNSafariWebView: UIViewControllerRepresentable {
 
-    // MARK: - Public properties
+    // MARK: - Public typealiases
 
-    @Environment(\.presentationMode) var presentationMode
+    ///
+    ///
+    ///
+    public typealias Action = () -> Void
 
 
 
     // MARK: - Private properties
 
     private let url: URL
+    private let action: Action
 
 
 
@@ -39,8 +43,12 @@ public struct MLNSafariWebView: UIViewControllerRepresentable {
     ///
     ///
     ///
-    public init(url: URL) {
+    public init(
+        url: URL,
+        completion action: @escaping Action
+    ) {
         self.url = url
+        self.action = action
     }
 
 
@@ -50,23 +58,20 @@ public struct MLNSafariWebView: UIViewControllerRepresentable {
     ///
     ///
     ///
-    public func makeCoordinator() -> Coordinator { .init(self) }
+    public func makeCoordinator() -> Coordinator { .init(action: action) }
 
     ///
     ///
     ///
-    public func makeUIViewController(context: Context) -> UINavigationController {
+    public func makeUIViewController(context: Context) -> SFSafariViewController {
         let safariVC = SFSafariViewController(url: url)
         safariVC.delegate = context.coordinator
 
-        let navigationVC = UINavigationController(rootViewController: safariVC)
-        navigationVC.setNavigationBarHidden(true, animated: false)
-
-        return navigationVC
+        return safariVC
     }
 
     ///
     ///
     ///
-    public func updateUIViewController(_ uiViewController: UINavigationController, context: Context) { }
+    public func updateUIViewController(_ uiViewController: SFSafariViewController, context: Context) { }
 }

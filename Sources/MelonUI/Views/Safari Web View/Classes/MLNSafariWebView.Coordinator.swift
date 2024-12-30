@@ -21,10 +21,10 @@ extension MLNSafariWebView {
     ///
     ///
     @MainActor public final class Coordinator: NSObject, @preconcurrency SFSafariViewControllerDelegate {
-        private let parent: MLNSafariWebView
+        private let action: Action
 
-        init(_ parent: MLNSafariWebView) {
-            self.parent = parent
+        init(action: @escaping Action) {
+            self.action = action
         }
 
 
@@ -35,7 +35,7 @@ extension MLNSafariWebView {
         ///
         ///
         public func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
-            parent.presentationMode.wrappedValue.dismiss()
+            action()
         }
     }
 }
