@@ -22,6 +22,12 @@ import SwiftUI
 @available(iOS 16.0, *)
 public struct MLNSafariWebView: UIViewControllerRepresentable {
 
+    // MARK: - Public properties
+
+    @Environment(\.presentationMode) var presentationMode
+
+
+
     // MARK: - Private properties
 
     private let url: URL
@@ -44,7 +50,17 @@ public struct MLNSafariWebView: UIViewControllerRepresentable {
     ///
     ///
     ///
-    public func makeUIViewController(context: Context) -> SFSafariViewController { .init(url: url) }
+    public func makeCoordinator() -> Coordinator { .init(self) }
+
+    ///
+    ///
+    ///
+    public func makeUIViewController(context: Context) -> SFSafariViewController {
+        let safariVC = SFSafariViewController(url: url)
+        safariVC.delegate = context.coordinator
+
+        return safariVC
+    }
 
     ///
     ///
