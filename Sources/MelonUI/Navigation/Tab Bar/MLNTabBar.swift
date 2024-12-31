@@ -45,7 +45,6 @@ public struct MLNTabBar: View {
                         transition: tabBarStyle.transition,
                         animation: tabBarStyle.animation
                     )
-                    .padding(.bottom, 50)
 
                     TabView(
                         selection: $selectedTab,
