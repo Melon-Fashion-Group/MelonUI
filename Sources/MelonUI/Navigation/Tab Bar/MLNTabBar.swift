@@ -38,25 +38,25 @@ public struct MLNTabBar: View {
         tabBarStyle.colors.background
             .ignoresSafeArea()
             .overlay {
-                VStack(spacing: .zero) {
-                    ContentView(
-                        selection: selectedTab,
-                        views: store.tabs.map { $0.view },
-                        transition: tabBarStyle.transition,
-                        animation: tabBarStyle.animation
-                    )
-
-                    TabView(
-                        selection: $selectedTab,
-                        tabs: store.tabs.map { ($0.icon, $0.title, $0.badge) },
-                        tabStyle: tabStyle,
-                        badgeStyle: badgeStyle
-                    )
-                    .frame(height: 50)
-                    .background(tabBarStyle.colors.foreground)
-                    .overlay(alignment: .top) {
-                        separatorView
-                    }
+                ContentView(
+                    selection: selectedTab,
+                    views: store.tabs.map { $0.view },
+                    transition: tabBarStyle.transition,
+                    animation: tabBarStyle.animation
+                )
+                .padding(.bottom, 50)
+            }
+            .overlay(alignment: .bottom) {
+                TabView(
+                    selection: $selectedTab,
+                    tabs: store.tabs.map { ($0.icon, $0.title, $0.badge) },
+                    tabStyle: tabStyle,
+                    badgeStyle: badgeStyle
+                )
+                .frame(height: 50)
+                .background(tabBarStyle.colors.foreground)
+                .overlay(alignment: .top) {
+                    separatorView
                 }
             }
     }
