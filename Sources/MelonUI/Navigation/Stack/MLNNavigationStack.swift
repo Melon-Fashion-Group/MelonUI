@@ -24,7 +24,7 @@ public struct MLNNavigationStack: View {
 
     // MARK: - Private properties
 
-    @ObservedObject private var store: MLNStackStore
+    @ObservedObject private var store: MLNNavigationStackStore
 
 
 
@@ -35,7 +35,7 @@ public struct MLNNavigationStack: View {
             if let rootView = store.rootItem?.view {
                 rootView
                     .toolbar(.hidden, for: .navigationBar)
-                    .navigationDestination(for: MLNStackItem.self) { $0.view }
+                    .navigationDestination(for: MLNNavigationStackItem.self) { $0.view }
             }
         }
     }
@@ -47,7 +47,7 @@ public struct MLNNavigationStack: View {
     ///
     ///
     ///
-    public init(store: MLNStackStore) {
+    public init(store: MLNNavigationStackStore) {
         self.store = store
     }
 }

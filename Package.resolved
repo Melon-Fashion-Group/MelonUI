@@ -6,8 +6,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Melon-Fashion-Group/MelonKit",
       "state" : {
-        "revision" : "442f8c1380b53a6aacc8559c000d78226959a858",
-        "version" : "0.23.0"
+        "revision" : "f3f1d4553b73df563d79cb8783bf1be44a06e7fc",
+        "version" : "0.24.0"
       }
     }
   ],
