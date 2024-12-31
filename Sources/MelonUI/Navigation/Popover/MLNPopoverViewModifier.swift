@@ -24,8 +24,8 @@ struct MLNPopoverViewModifier: ViewModifier {
             .popover(
                 type: store.popover.type,
                 isPresented: .init(
-                    get: { store.isPresented },
-                    set: { store.isPresented = $0 }
+                    get: { store.get() },
+                    set: { store.set($0) }
                 )
             ) {
                 store.popover.view
