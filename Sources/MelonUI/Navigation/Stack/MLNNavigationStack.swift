@@ -31,8 +31,8 @@ public struct MLNNavigationStack: View {
     // MARK: - Body
 
     public var body: some View {
-        NavigationStack(path: $store.items) {
-            if let rootView = store.rootItem?.view {
+        if let rootView = store.rootItem?.view {
+            NavigationStack(path: $store.items) {
                 rootView
                     .toolbar(.hidden, for: .navigationBar)
                     .navigationDestination(for: MLNNavigationStackItem.self) { $0.view }
