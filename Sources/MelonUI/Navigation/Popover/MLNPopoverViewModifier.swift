@@ -17,19 +17,15 @@ import SwiftUI
 // MARK: - MLNPopoverViewModifier
 
 struct MLNPopoverViewModifier: ViewModifier {
-    private let store: MLNPopoverStore
+    @ObservedObject private var store: MLNPopoverStore
 
     func body(content: Content) -> some View {
-        content
-            .popover(
-                type: store.popover.type,
-                isPresented: .init(
-                    get: { store.get() },
-                    set: { store.set($0) }
-                )
-            ) {
-                store.popover.view
-            }
+        content.popover(
+            type: store.popover.type,
+            isPresented: $store.isPresented
+        ) {
+            store.popover.view
+        }
     }
 
     init(store: MLNPopoverStore) {
