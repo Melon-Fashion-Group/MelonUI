@@ -36,7 +36,7 @@ extension MLNPageIndicatorView {
                 }
                 .scrollIndicators(.never)
                 .scrollDisabled(true)
-                .onChange(of: selectedIndicator) { _ in
+                .onChange(of: selectedIndicator) {
                     withAnimation(style.animation) {
                         scrollView.scrollTo(selectedIndicator, anchor: .center)
                     }

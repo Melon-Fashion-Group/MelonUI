@@ -26,17 +26,16 @@ extension MLNPageIndicatorView {
             ScrollViewReader { scrollView in
                 ScrollView(.horizontal) {
                     LazyHStack(spacing: style.spacing) {
-                        ForEach(.zero ..< indicators.count, id: \.self) { index in
+                        ForEach(indicators.indices, id: \.self) { index in
                             indicators[index].view
                                 .frame(width: style.size.width, height: style.size.height)
                                 .foregroundStyle(selectedIndicator == index ? style.colors.active : style.colors.inactive)
-                                .id(index)
                         }
                     }
                 }
                 .scrollIndicators(.never)
                 .scrollDisabled(true)
-                .onChange(of: selectedIndicator) { _ in
+                .onChange(of: selectedIndicator) {
                     withAnimation(style.animation) {
                         scrollView.scrollTo(selectedIndicator, anchor: .center)
                     }

@@ -16,7 +16,7 @@ import SwiftUI
 
 // MARK: - RepresentableVideoPlayerView
 
-@available(iOS 16.0, *)
+@available(iOS 17.0, *)
 final class RepresentableVideoPlayerView: UIView {
     private let playerLayer = AVPlayerLayer()
 

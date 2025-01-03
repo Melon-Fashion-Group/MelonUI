@@ -22,7 +22,7 @@ extension View {
     ///
     ///
     ///
-    @available(iOS 16.0, *)
+    @available(iOS 17.0, *)
     public func shimeEffect(_ style: MLNShimeEffectStyle) -> some View {
         modifier(ShimeEffectModifier(style: style))
     }

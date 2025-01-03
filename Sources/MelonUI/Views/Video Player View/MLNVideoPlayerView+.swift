@@ -18,12 +18,12 @@ import SwiftUI
 // MARK: - EnvironmentValues+
 
 extension EnvironmentValues {
-    @available(iOS 16.0, *)
+    @available(iOS 17.0, *)
     private struct VideoGravityKey: EnvironmentKey {
         static let defaultValue: AVLayerVideoGravity = .resizeAspect
     }
 
-    @available(iOS 16.0, *)
+    @available(iOS 17.0, *)
     var videoGravity: AVLayerVideoGravity {
         get { self[VideoGravityKey.self] }
         set { self[VideoGravityKey.self] = newValue }
@@ -41,7 +41,7 @@ extension View {
     ///
     ///
     ///
-    @available(iOS 16.0, *)
+    @available(iOS 17.0, *)
     public func playerVideoScaling(_ scaling: MLNVideoPlayer.VideoScaling) -> some View {
         let videoGravity: AVLayerVideoGravity = switch scaling {
         case .resize: .resize

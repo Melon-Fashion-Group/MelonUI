@@ -16,7 +16,7 @@ import SwiftUI
 
 // MARK: - VideoPlayerView
 
-@available(iOS 16.0, *)
+@available(iOS 17.0, *)
 struct VideoPlayerView: UIViewRepresentable {
     private let player: AVQueuePlayer
     private let videoGravity: AVLayerVideoGravity

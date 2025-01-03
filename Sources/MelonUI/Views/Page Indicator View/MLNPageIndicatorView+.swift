@@ -16,12 +16,12 @@ import SwiftUI
 // MARK: - EnvironmentValues+
 
 extension EnvironmentValues {
-    @available(iOS 16.0, *)
+    @available(iOS 17.0, *)
     private struct PageIndicatorStyleKey: EnvironmentKey {
         static let defaultValue: MLNPageIndicatorView.IndicatorStyle = .init()
     }
 
-    @available(iOS 16.0, *)
+    @available(iOS 17.0, *)
     var pageIndicatorStyle: MLNPageIndicatorView.IndicatorStyle {
         get { self[PageIndicatorStyleKey.self] }
         set { self[PageIndicatorStyleKey.self] = newValue }
@@ -39,7 +39,7 @@ extension View {
     ///
     ///
     ///
-    @available(iOS 16.0, *)
+    @available(iOS 17.0, *)
     public func pageIndicatorStyle(_ style: MLNPageIndicatorView.IndicatorStyle) -> some View {
         environment(\.pageIndicatorStyle, style)
     }

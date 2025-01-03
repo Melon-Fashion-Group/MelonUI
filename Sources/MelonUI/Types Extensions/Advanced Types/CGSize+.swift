@@ -22,6 +22,6 @@ extension CGSize {
     ///
     ///
     ///
-    @available(iOS 16.0, *)
+    @available(iOS 17.0, *)
     public static let identity: Self = .init(width: 1, height: 1)
 }

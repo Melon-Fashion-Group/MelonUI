@@ -19,7 +19,7 @@ import SwiftUI
 ///
 ///
 ///
-@available(iOS 16.0, *)
+@available(iOS 17.0, *)
 public struct MLNVideoPlayerView<Loader: View, Error: View>: View {
 
     // MARK: - Private properties

@@ -19,7 +19,7 @@ import SwiftUI
 ///
 ///
 ///
-@available(iOS 16.0, *)
+@available(iOS 17.0, *)
 public struct MLNSafariWebView: UIViewControllerRepresentable {
 
     // MARK: - Public typealiases

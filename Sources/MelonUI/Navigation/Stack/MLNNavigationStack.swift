@@ -9,6 +9,7 @@
 
 // MARK: Import section
 
+import Observation
 import MelonKit
 import SwiftUI
 
@@ -19,12 +20,12 @@ import SwiftUI
 ///
 ///
 ///
-@available(iOS 16.0, *)
+@available(iOS 17.0, *)
 public struct MLNNavigationStack: View {
 
     // MARK: - Private properties
 
-    @ObservedObject private var store: MLNNavigationStackStore
+    @Bindable private var store: MLNNavigationStackStore
 
 
 

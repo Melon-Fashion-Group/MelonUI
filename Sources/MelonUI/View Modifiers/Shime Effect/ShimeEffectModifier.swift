@@ -15,7 +15,7 @@ import SwiftUI
 
 // MARK: - ShimeEffectModifier
 
-@available(iOS 16.0, *)
+@available(iOS 17.0, *)
 struct ShimeEffectModifier: ViewModifier {
     private let style: MLNShimeEffectStyle
     @State private var startPoint: CGFloat = -1

@@ -22,7 +22,7 @@ import PackageDescription
 let package = Package(
     name: "Melon Fashion UI",
     platforms: [
-        .iOS(.v16)
+        .iOS(.v17)
     ],
     products: [
         .library(

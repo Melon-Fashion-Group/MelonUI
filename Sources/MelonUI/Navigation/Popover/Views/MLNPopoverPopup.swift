@@ -60,7 +60,7 @@ struct MLNPopoverPopup<Content: View>: View {
     }
 
     private func hide() {
-        withAnimation(.interactiveSpring(duration: 0.3), delay: 0.3) {
+        withAnimation(.interactiveSpring(duration: 0.3)) {
             isPresented = false
         } completion: {
             offset = .zero

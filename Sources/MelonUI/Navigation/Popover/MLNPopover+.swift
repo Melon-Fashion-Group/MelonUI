@@ -21,12 +21,12 @@ extension View {
     ///
     ///
     ///
-    @available(iOS 16.0, *)
+    @available(iOS 17.0, *)
     public func popover(store: MLNPopoverStore) -> some View {
         modifier(MLNPopoverViewModifier(store: store))
     }
 
-    @available(iOS 16.0, *)
+    @available(iOS 17.0, *)
     @ViewBuilder func popover<Content: View>(
         type presentationType: MLNPopover.PresentationType,
         isPresented: Binding<Bool>,

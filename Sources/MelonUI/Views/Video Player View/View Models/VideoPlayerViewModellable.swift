@@ -16,7 +16,7 @@ import Foundation
 // MARK: - VideoPlayerViewModellable
 
 @MainActor
-@available(iOS 16.0, *)
+@available(iOS 17.0, *)
 protocol VideoPlayerViewModellable: ObservableObject {
     var state: VideoPlayerVM.State { get }
 

@@ -16,7 +16,7 @@ import Foundation
 // MARK: - VideoPlayerVM
 
 @MainActor
-@available(iOS 16.0, *)
+@available(iOS 17.0, *)
 final class VideoPlayerVM: VideoPlayerViewModellable {
     private let urlRequest: URLRequest
     private let cacheDirectoryPath: URL = {
