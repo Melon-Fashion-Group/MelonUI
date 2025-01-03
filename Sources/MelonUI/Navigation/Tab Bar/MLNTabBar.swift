@@ -25,7 +25,9 @@ public struct MLNTabBar: View {
     // MARK: - Private properties
 
     @Binding private var selectedTab: Int
-    private let store: MLNTabStore
+
+    @ObservedObject private var store: MLNTabStore
+
     @Environment(\.tabBarStyle) private var tabBarStyle
     @Environment(\.tabStyle) private var tabStyle
     @Environment(\.badgeStyle) private var badgeStyle
