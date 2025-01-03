@@ -9,7 +9,6 @@
 
 // MARK: Import section
 
-import Observation
 import MelonKit
 import SwiftUI
 
@@ -25,7 +24,7 @@ public struct MLNNavigationStack: View {
 
     // MARK: - Private properties
 
-    @Bindable private var store: MLNNavigationStackStore
+    @ObservedObject private var store: MLNNavigationStackStore
 
 
 
