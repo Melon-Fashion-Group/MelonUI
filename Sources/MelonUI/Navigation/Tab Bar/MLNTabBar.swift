@@ -22,9 +22,33 @@ import SwiftUI
 @available(iOS 17.0, *)
 public struct MLNTabBar: View {
 
+    // MARK: - Public typealiases
+
+    ///
+    ///
+    ///
+    public typealias Action = (Int) -> Void
+
+
+
     // MARK: - Private properties
 
     @ObservedObject private var store: MLNTabStore
+
+    private let onSameTabDoubleTap: Action?
+
+    private var selection: Binding<Int> {
+        .init(
+            get: { self.store.selectedTab },
+            set: { newValue in
+                if newValue == self.store.selectedTab {
+                    onSameTabDoubleTap?(newValue)
+                }
+
+                self.store.selectedTab = newValue
+            }
+        )
+    }
 
     @Environment(\.tabBarStyle) private var tabBarStyle
     @Environment(\.tabStyle) private var tabStyle
@@ -39,7 +63,7 @@ public struct MLNTabBar: View {
             .ignoresSafeArea()
             .overlay {
                 ContentView(
-                    selection: store.selectedTab,
+                    selection: selection.wrappedValue,
                     views: store.tabs.map { $0.view },
                     transition: tabBarStyle.transition,
                     animation: tabBarStyle.animation
@@ -48,7 +72,7 @@ public struct MLNTabBar: View {
             }
             .overlay(alignment: .bottom) {
                 TabView(
-                    selection: $store.selectedTab,
+                    selection: selection,
                     tabs: store.tabs.map { ($0.icon, $0.title, $0.badge) },
                     tabStyle: tabStyle,
                     badgeStyle: badgeStyle
@@ -68,8 +92,12 @@ public struct MLNTabBar: View {
     ///
     ///
     ///
-    public init(store: MLNTabStore) {
+    public init(
+        store: MLNTabStore,
+        onSameTabDoubleTap: Action? = nil
+    ) {
         self.store = store
+        self.onSameTabDoubleTap = onSameTabDoubleTap
     }
 }
 
