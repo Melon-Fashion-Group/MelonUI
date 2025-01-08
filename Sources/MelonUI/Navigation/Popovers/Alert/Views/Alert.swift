@@ -1,9 +1,9 @@
 //
-//  MLNPopoverAlert.swift
+//  Alert.swift
 //  Melon Fashion UI
 //
-//  Created by Dimka Novikov on 31.12.2024.
-//  Copyright © 2024 Melon Fashion Group. All rights reserved.
+//  Created by Dimka Novikov on 08.01.2025.
+//  Copyright © 2025 Melon Fashion Group. All rights reserved.
 //
 
 
@@ -13,15 +13,17 @@ import SwiftUI
 
 
 
-// MARK: - MLNPopoverAlert
+// MARK: - Alert
 
-struct MLNPopoverAlert<Content: View>: View {
+@available(iOS 17.0, *)
+struct Alert<Content: View>: View {
     private let isPresented: Bool
     private let content: Content
 
     var body: some View {
         Color.black.opacity(0.5)
             .ignoresSafeArea()
+            .opacity(isPresented ? 1 : .zero)
             .overlay {
                 if isPresented {
                     content
@@ -33,7 +35,6 @@ struct MLNPopoverAlert<Content: View>: View {
                         )
                 }
             }
-            .opacity(isPresented ? 1 : .zero)
     }
 
     init(
