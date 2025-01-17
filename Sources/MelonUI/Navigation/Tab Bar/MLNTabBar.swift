@@ -88,8 +88,8 @@ public struct MLNTabBar: View {
     ///
     public init(
         store: MLNTabStore,
-        onTabTap: (() -> Void)? = nil,
-        onSameTabDoubleTap: ((Int) -> Void)? = nil
+        tap onTabTap: (() -> Void)? = nil,
+        doubleTap onSameTabDoubleTap: ((Int) -> Void)? = nil
     ) {
         self.store = store
         self.onTabTap = onTabTap
