@@ -22,25 +22,19 @@ import SwiftUI
 @available(iOS 17.0, *)
 public struct MLNTabBar: View {
 
-    // MARK: - Public typealiases
-
-    ///
-    ///
-    ///
-    public typealias Action = (Int) -> Void
-
-
-
     // MARK: - Private properties
 
     @ObservedObject private var store: MLNTabStore
 
-    private let onSameTabDoubleTap: Action?
+    private let onTabTap: (() -> Void)?
+    private let onSameTabDoubleTap: ((Int) -> Void)?
 
     private var selection: Binding<Int> {
         .init(
             get: { self.store.selectedTab },
             set: { newValue in
+                onTabTap?()
+
                 if newValue == self.store.selectedTab {
                     onSameTabDoubleTap?(newValue)
                 }
@@ -94,9 +88,11 @@ public struct MLNTabBar: View {
     ///
     public init(
         store: MLNTabStore,
-        onSameTabDoubleTap: Action? = nil
+        onTabTap: (() -> Void)? = nil,
+        onSameTabDoubleTap: ((Int) -> Void)? = nil
     ) {
         self.store = store
+        self.onTabTap = onTabTap
         self.onSameTabDoubleTap = onSameTabDoubleTap
     }
 }
