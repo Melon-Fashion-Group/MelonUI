@@ -43,8 +43,6 @@ extension MLNAsyncImage {
     }
 }
 
-extension AnyTransition: @retroactive @unchecked Sendable { }
-
 extension MLNAsyncImage.AsyncImageStyle {
 
     ///

@@ -1,9 +1,9 @@
 //
-//  RepresentableVideoPlayerView.swift
+//  RepresentableAsyncVideoPlayerView.swift
 //  Melon Fashion UI
 //
-//  Created by Dimka Novikov on 28.12.2024.
-//  Copyright © 2024 Melon Fashion Group. All rights reserved.
+//  Created by Dimka Novikov on 17.01.2025.
+//  Copyright © 2025 Melon Fashion Group. All rights reserved.
 //
 
 
@@ -14,10 +14,10 @@ import SwiftUI
 
 
 
-// MARK: - RepresentableVideoPlayerView
+// MARK: - RepresentableAsyncVideoPlayerView
 
 @available(iOS 17.0, *)
-final class RepresentableVideoPlayerView: UIView {
+final class RepresentableAsyncVideoPlayerView: UIView {
     private let playerLayer = AVPlayerLayer()
 
     convenience init(
@@ -33,7 +33,12 @@ final class RepresentableVideoPlayerView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
+        setupRootView()
+        setupRootLayer()
+
         setupSublayers()
+
+        computeFrames()
     }
 
     required init?(coder: NSCoder) {
@@ -43,10 +48,22 @@ final class RepresentableVideoPlayerView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        playerLayer.frame = bounds
+        computeFrames()
+    }
+
+    private func setupRootView() {
+        backgroundColor = .clear
+    }
+
+    private func setupRootLayer() {
+        layer.backgroundColor = UIColor.clear.cgColor
     }
 
     private func setupSublayers() {
         layer.addSublayer(playerLayer)
+    }
+
+    private func computeFrames() {
+        playerLayer.frame = bounds
     }
 }

@@ -1,35 +1,37 @@
 //
-//  MLNAsyncImage.swift
+//  MLNAsyncVideoPlayer.swift
 //  Melon Fashion UI
 //
-//  Created by Dimka Novikov on 16.01.2025.
+//  Created by Dimka Novikov on 17.01.2025.
 //  Copyright © 2025 Melon Fashion Group. All rights reserved.
 //
 
 
 // MARK: Import section
 
+import MelonKit
 import SwiftUI
 
 
 
-// MARK: - MLNAsyncImage
+// MARK: - MLNAsyncVideoPlayer
 
 ///
 ///
 ///
 @available(iOS 17.0, *)
-public struct MLNAsyncImage<Loader: View, Error: View>: View {
+public struct MLNAsyncVideoPlayer<Loader: View, Error: View>: View {
 
     // MARK: - Private properties
 
+    private let player: MLNVideoPlayer
     private let loader: Loader
     private let error: (_ action: @escaping () -> Void) -> Error
     private let completion: (() -> Void)?
 
-    @State private var viewModel: AsyncImageViewModel
+    @State private var viewModel: AsyncVideoPlayerViewModel
 
-    @Environment(\.asyncImageStyle) private var asyncImageStyle
+    @Environment(\.asyncVideoPlayerStyle) private var asyncVideoPlayerStyle
 
 
 
@@ -40,15 +42,15 @@ public struct MLNAsyncImage<Loader: View, Error: View>: View {
             switch viewModel.state {
             case .loading:
                 loader
-                    .transition(asyncImageStyle.transition ?? .identity)
+                    .transition(asyncVideoPlayerStyle.transition ?? .identity)
             case .error:
                 error(reload)
-                    .transition(asyncImageStyle.transition ?? .identity)
-            case .loaded(let image):
-                Image(uiImage: image)
-                    .resizable(capInsets: asyncImageStyle.scaling.insets, resizingMode: asyncImageStyle.scaling.resizingMode)
-                    .aspectRatio(asyncImageStyle.aspect.ratio, contentMode: asyncImageStyle.aspect.contentMode)
-                    .transition(asyncImageStyle.transition ?? .identity)
+                    .transition(asyncVideoPlayerStyle.transition ?? .identity)
+            case .loaded(let fileURL):
+                let _ = player.setupPlayer(with: fileURL)
+
+                AsyncVideoPlayerView(player: player.queue, gravity: asyncVideoPlayerStyle.videoGravity)
+                    .transition(asyncVideoPlayerStyle.transition ?? .identity)
                     .onAppear(perform: completion)
             }
         }
@@ -65,15 +67,16 @@ public struct MLNAsyncImage<Loader: View, Error: View>: View {
     ///
     ///
     public init(
-        request: URLRequest,
+        player: MLNVideoPlayer,
         @ViewBuilder loader: () -> Loader = { Color.clear },
         @ViewBuilder error: @escaping (_ action: @escaping () -> Void) -> Error = { _ in EmptyView() },
         completion: (() -> Void)? = nil
     ) {
-        viewModel = .init(request: request)
+        self.player = player
         self.loader = loader()
         self.error = error
         self.completion = completion
+        self.viewModel = .init(request: player.request)
     }
 
 

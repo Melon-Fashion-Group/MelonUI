@@ -1,9 +1,9 @@
 //
-//  VideoPlayerView.swift
+//  AsyncVideoPlayerView.swift
 //  Melon Fashion UI
 //
-//  Created by Dimka Novikov on 28.12.2024.
-//  Copyright © 2024 Melon Fashion Group. All rights reserved.
+//  Created by Dimka Novikov on 17.01.2025.
+//  Copyright © 2025 Melon Fashion Group. All rights reserved.
 //
 
 
@@ -14,10 +14,10 @@ import SwiftUI
 
 
 
-// MARK: - VideoPlayerView
+// MARK: - AsyncVideoPlayerView
 
 @available(iOS 17.0, *)
-struct VideoPlayerView: UIViewRepresentable {
+struct AsyncVideoPlayerView: UIViewRepresentable {
     private let player: AVQueuePlayer
     private let videoGravity: AVLayerVideoGravity
 
@@ -29,9 +29,9 @@ struct VideoPlayerView: UIViewRepresentable {
         self.videoGravity = videoGravity
     }
 
-    func makeUIView(context: Context) -> RepresentableVideoPlayerView {
+    func makeUIView(context: Context) -> RepresentableAsyncVideoPlayerView {
         .init(player: player, gravity: videoGravity)
     }
 
-    func updateUIView(_ uiView: RepresentableVideoPlayerView, context: Context) { }
+    func updateUIView(_ uiView: RepresentableAsyncVideoPlayerView, context: Context) { }
 }
