@@ -68,7 +68,7 @@ public struct MLNAsyncVideoPlayer<Loader: View, Error: View>: View {
     ///
     public init(
         player: MLNVideoPlayer,
-        @ViewBuilder loader: () -> Loader = { Color.clear },
+        @ViewBuilder loader: () -> Loader = { EmptyView() },
         @ViewBuilder error: @escaping (_ action: @escaping () -> Void) -> Error = { _ in EmptyView() },
         completion: (() -> Void)? = nil
     ) {

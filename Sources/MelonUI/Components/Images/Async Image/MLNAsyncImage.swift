@@ -66,7 +66,7 @@ public struct MLNAsyncImage<Loader: View, Error: View>: View {
     ///
     public init(
         request: URLRequest,
-        @ViewBuilder loader: () -> Loader = { Color.clear },
+        @ViewBuilder loader: () -> Loader = { EmptyView() },
         @ViewBuilder error: @escaping (_ action: @escaping () -> Void) -> Error = { _ in EmptyView() },
         completion: (() -> Void)? = nil
     ) {
