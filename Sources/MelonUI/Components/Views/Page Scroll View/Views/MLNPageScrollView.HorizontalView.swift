@@ -19,8 +19,9 @@ import SwiftUI
 extension MLNPageScrollView {
     struct HorizontalView: View {
         @Binding private var selectedPage: Int
-        @State private var currentPage: Int? = .zero
         private let content: Content
+
+        @State private var currentPage: Int?
 
         var body: some View {
             GeometryReader { geometry in
