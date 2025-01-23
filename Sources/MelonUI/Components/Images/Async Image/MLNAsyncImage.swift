@@ -23,11 +23,12 @@ public struct MLNAsyncImage<Loader: View, Error: View>: View {
 
     // MARK: - Private properties
 
+    private let request: URLRequest
     private let loader: Loader
     private let error: (_ action: @escaping () -> Void) -> Error
     private let completion: (() -> Void)?
 
-    @State private var viewModel: AsyncImageViewModel
+    @State private var viewModel = AsyncImageViewModel()
 
     @Environment(\.asyncImageStyle) private var asyncImageStyle
 
@@ -52,8 +53,8 @@ public struct MLNAsyncImage<Loader: View, Error: View>: View {
                     .onAppear(perform: completion)
             }
         }
-        .task(priority: .background) {
-            await viewModel.load()
+        .task(id: request, priority: .background) {
+            await viewModel.reload(with: request)
         }
     }
 
@@ -70,7 +71,7 @@ public struct MLNAsyncImage<Loader: View, Error: View>: View {
         @ViewBuilder error: @escaping (_ action: @escaping () -> Void) -> Error = { _ in EmptyView() },
         completion: (() -> Void)? = nil
     ) {
-        viewModel = .init(request: request)
+        self.request = request
         self.loader = loader()
         self.error = error
         self.completion = completion
@@ -82,7 +83,7 @@ public struct MLNAsyncImage<Loader: View, Error: View>: View {
 
     private func reload() {
         Task(priority: .background) {
-            await viewModel.reload()
+            await viewModel.reload(with: request)
         }
     }
 }

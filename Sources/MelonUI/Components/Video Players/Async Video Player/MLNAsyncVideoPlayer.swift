@@ -24,12 +24,13 @@ public struct MLNAsyncVideoPlayer<Loader: View, Error: View>: View {
 
     // MARK: - Private properties
 
+    private let request: URLRequest
     private let player: MLNVideoPlayer
     private let loader: Loader
     private let error: (_ action: @escaping () -> Void) -> Error
     private let completion: (() -> Void)?
 
-    @State private var viewModel: AsyncVideoPlayerViewModel
+    @State private var viewModel = AsyncVideoPlayerViewModel()
 
     @Environment(\.asyncVideoPlayerStyle) private var asyncVideoPlayerStyle
 
@@ -55,7 +56,7 @@ public struct MLNAsyncVideoPlayer<Loader: View, Error: View>: View {
             }
         }
         .task(priority: .background) {
-            await viewModel.load()
+            await viewModel.load(with: request)
         }
     }
 
@@ -67,16 +68,17 @@ public struct MLNAsyncVideoPlayer<Loader: View, Error: View>: View {
     ///
     ///
     public init(
+        request: URLRequest,
         player: MLNVideoPlayer,
         @ViewBuilder loader: () -> Loader = { EmptyView() },
         @ViewBuilder error: @escaping (_ action: @escaping () -> Void) -> Error = { _ in EmptyView() },
         completion: (() -> Void)? = nil
     ) {
+        self.request = request
         self.player = player
         self.loader = loader()
         self.error = error
         self.completion = completion
-        self.viewModel = .init(request: player.request)
     }
 
 
@@ -85,7 +87,7 @@ public struct MLNAsyncVideoPlayer<Loader: View, Error: View>: View {
 
     private func reload() {
         Task(priority: .background) {
-            await viewModel.reload()
+            await viewModel.reload(with: request)
         }
     }
 }

@@ -31,8 +31,8 @@ import UIKit
 @MainActor protocol AsyncImageViewModellable: Observable {
     var state: AsyncImageState { get }
 
-    func load() async
-    func reload() async
+    func load(with request: URLRequest) async
+    func reload(with request: URLRequest) async
 }
 
 
@@ -42,13 +42,8 @@ import UIKit
 @available(iOS 17.0, *)
 @Observable final class AsyncImageViewModel: AsyncImageViewModellable {
     private(set) var state: AsyncImageState = .loading
-    private let request: URLRequest
 
-    init(request: URLRequest) {
-        self.request = request
-    }
-
-    func load() async {
+    func load(with request: URLRequest) async {
         // Getting file path
         guard
             let cachesDirectoryURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first,
@@ -84,9 +79,9 @@ import UIKit
         await MainActor.run { state = .loaded(image: image) }
     }
 
-    func reload() async {
+    func reload(with request: URLRequest) async {
         await MainActor.run { state = .loading }
 
-        await load()
+        await load(with: request)
     }
 }

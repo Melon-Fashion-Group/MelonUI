@@ -31,8 +31,8 @@ import MelonKit
 @MainActor protocol AsyncVideoPlayerViewModellable: Observable {
     var state: AsyncVideoPlayerState { get }
 
-    func load() async
-    func reload() async
+    func load(with request: URLRequest) async
+    func reload(with request: URLRequest) async
 }
 
 
@@ -42,13 +42,8 @@ import MelonKit
 @available(iOS 17.0, *)
 @Observable final class AsyncVideoPlayerViewModel: AsyncVideoPlayerViewModellable {
     private(set) var state: AsyncVideoPlayerState = .loading
-    private let request: URLRequest
 
-    init(request: URLRequest) {
-        self.request = request
-    }
-
-    func load() async {
+    func load(with request: URLRequest) async {
         // Getting file path
         guard
             let cachesDirectoryURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first,
@@ -79,9 +74,9 @@ import MelonKit
         await MainActor.run { state = .loaded(fileURL: fileURL) }
     }
 
-    func reload() async {
+    func reload(with request: URLRequest) async {
         await MainActor.run { state = .loading }
 
-        await load()
+        await load(with: request)
     }
 }
