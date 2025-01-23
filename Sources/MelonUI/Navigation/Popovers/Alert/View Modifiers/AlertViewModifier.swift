@@ -33,9 +33,7 @@ struct AlertViewModifier: ViewModifier {
             if let window {
                 let view = Alert(isPresented: $store.isPresented) {
                     removeChildVC(from: window)
-                } content: {
-                    store.view
-                }
+                } content: { store.view }
 
                 let viewController = UIHostingController(rootView: view)
                 addChildVC(viewController, to: window)

@@ -18,16 +18,19 @@ import SwiftUI
 @available(iOS 17.0, *)
 struct Popup<Content: View>: View {
     @Binding private var isPresented: Bool
+    private let action: () -> Void
     private let content: Content
 
     @State private var offset: CGFloat = .zero
+    @State private var isShowed = false
 
     var body: some View {
         Color.black.opacity(0.5)
-            .onTapGesture(perform: hide)
-            .opacity(isPresented ? 1 : .zero)
+            .ignoresSafeArea()
+            .opacity(isShowed ? 1 : .zero)
+            .onTapGesture { hide() }
             .overlay(alignment: .bottom) {
-                if isPresented {
+                if isShowed {
                     content
                         .offset(y: offset)
                         .gesture(
@@ -41,30 +44,38 @@ struct Popup<Content: View>: View {
                                     if gesture.translation.height > 100 { hide() } else { reset() }
                                 }
                         )
-                        .transition(
-                            .asymmetric(
-                                insertion: .move(edge: .bottom),
-                                removal: .move(edge: .bottom)
-                            )
-                        )
+                        .transition(.move(edge: .bottom).combined(with: .opacity))
                 }
             }
-            .ignoresSafeArea()
+            .onChange(of: isPresented) { _, isNewPresented in
+                if !isNewPresented { hide(isShowed: isNewPresented) }
+            }
+            .onAppear(perform: show)
     }
 
     init(
         isPresented: Binding<Bool>,
+        action: @escaping () -> Void,
         content: () -> Content
     ) {
         _isPresented = isPresented
+        self.action = action
         self.content = content()
     }
 
-    private func hide() {
+    private func hide(isShowed: Bool = false) {
         withAnimation(.interactiveSpring(duration: 0.3)) {
-            isPresented = false
+            self.isShowed = isShowed
         } completion: {
-            offset = .zero
+            isPresented = isShowed
+
+            action()
+        }
+    }
+
+    private func show() {
+        withAnimation(.interactiveSpring(duration: 0.3)) {
+            isShowed = isPresented
         }
     }
 
