@@ -23,8 +23,8 @@ struct ShineEffectViewModifier: ViewModifier {
 
     @State private var isAnimated = true
 
-    var startPoint: UnitPoint { isAnimated ? .init(x: min, y: min) : .init(x: 1, y: 1) }
-    var endPoint: UnitPoint { isAnimated ? .init(x: 0, y: 0) : .init(x: max, y: max) }
+    var startPoint: UnitPoint { isAnimated ? .init(x: min, y: 0) : .init(x: 1, y: 1) }
+    var endPoint: UnitPoint { isAnimated ? .init(x: 0, y: 0) : .init(x: max, y: 1) }
 
     func body(content: Content) -> some View {
         content
