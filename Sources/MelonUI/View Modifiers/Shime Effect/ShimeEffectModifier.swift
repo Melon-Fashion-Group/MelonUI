@@ -16,56 +16,33 @@ import SwiftUI
 // MARK: - ShimeEffectModifier
 
 @available(iOS 17.0, *)
-struct ShimeEffectModifier: ViewModifier {
-    private let style: MLNShimeEffectStyle
-    @State private var startPoint: CGFloat = -1
+struct ShimeEffectViewModifier: ViewModifier {
+    private let gradient: Gradient
+    private let animation: Animation
 
-    public init(style: MLNShimeEffectStyle) {
-        self.style = style
+    private let min, max: CGFloat
 
-        self.startPoint = startPoint
-    }
+    @State private var isAnimated = true
+
+    var startPoint: UnitPoint { isAnimated ? .init(x: min, y: min) : .init(x: 1, y: 1) }
+    var endPoint: UnitPoint { isAnimated ? .init(x: 0, y: 0) : .init(x: max, y: max) }
 
     func body(content: Content) -> some View {
         content
-            .hidden()
-            .overlay {
-                Rectangle()
-                    .fill(style.colors.tint)
-                    .mask { content }
-                    .overlay {
-                        GeometryReader { geometry in
-                            let offset = geometry.size.height / 2
+            .mask(LinearGradient(gradient: gradient, startPoint: startPoint, endPoint: endPoint))
+            .onAppear { isAnimated = false }
+            .animation(animation, value: isAnimated)
+    }
 
-                            Rectangle()
-                                .fill(style.colors.highlight)
-                                .mask {
-                                    Rectangle()
-                                        .fill(
-                                            .linearGradient(
-                                                colors: [
-                                                    style.colors.highlight.opacity(.zero),
-                                                    style.colors.highlight.opacity(style.opacity),
-                                                    style.colors.highlight.opacity(.zero)
-                                                ],
-                                                startPoint: .leading,
-                                                endPoint: .trailing
-                                            )
-                                        )
-                                        .blur(radius: style.blur)
-                                        .offset(x: startPoint > .zero ? offset : -offset)
-                                        .offset(x: geometry.size.width * startPoint)
-                                }
-                        }
-                        .mask { content }
-                    }
-            }
-            .onAppear {
-                startPoint = -startPoint
-            }
-            .animation(
-                style.animation.repeatForever(autoreverses: false),
-                value: startPoint
-            )
+    init(
+        gradient: Gradient,
+        width: CGFloat,
+        animation: Animation
+    ) {
+        self.gradient = gradient
+        self.animation = animation
+
+        min = 0 - width
+        max = 1 + width
     }
 }
