@@ -1,5 +1,5 @@
 //
-//  MLNPageIndicatorView.Size.swift
+//  MLNPagedIndicatorView.Size.swift
 //  Melon Fashion UI
 //
 //  Created by Dimka Novikov on 29.12.2024.
@@ -13,9 +13,9 @@ import SwiftUI
 
 
 
-// MARK: - MLNPageIndicatorView.Size
+// MARK: - MLNPagedIndicatorView.Size
 
-extension MLNPageIndicatorView {
+extension MLNPagedIndicatorView {
 
     ///
     ///

@@ -1,5 +1,5 @@
 //
-//  MLNPageIndicatorView.VerticalView.swift
+//  MLNPagedIndicatorView.VerticalView.swift
 //  Melon Fashion UI
 //
 //  Created by Dimka Novikov on 29.12.2024.
@@ -13,13 +13,13 @@ import SwiftUI
 
 
 
-// MARK: - MLNPageIndicatorView.VerticalView
+// MARK: - MLNPagedIndicatorView.VerticalView
 
-extension MLNPageIndicatorView {
+extension MLNPagedIndicatorView {
     struct VerticalView: View {
-        @Binding private var selectedIndicator: Int
-        private let indicators: [MLNPageIndicatorView.Indicator]
-        private let style: MLNPageIndicatorView.IndicatorStyle
+        @Binding private var selectedIndicator: Int?
+        private let indicators: [MLNPagedIndicatorView.Indicator]
+        private let style: MLNPagedIndicatorView.IndicatorStyle
         private let overallHeight: CGFloat
 
         var body: some View {
@@ -47,9 +47,9 @@ extension MLNPageIndicatorView {
         }
 
         init(
-            selection: Binding<Int>,
-            indicators: [MLNPageIndicatorView.Indicator],
-            style: MLNPageIndicatorView.IndicatorStyle
+            selection: Binding<Int?>,
+            indicators: [MLNPagedIndicatorView.Indicator],
+            style: MLNPagedIndicatorView.IndicatorStyle
         ) {
             _selectedIndicator = selection
             self.indicators = indicators

@@ -1,5 +1,5 @@
 //
-//  MLNPageIndicatorView.IndicatorStyle.swift
+//  MLNPagedIndicatorView.IndicatorStyle.swift
 //  Melon Fashion UI
 //
 //  Created by Dimka Novikov on 29.12.2024.
@@ -13,9 +13,9 @@ import SwiftUI
 
 
 
-// MARK: - MLNPageIndicatorView.IndicatorStyle
+// MARK: - MLNPagedIndicatorView.IndicatorStyle
 
-extension MLNPageIndicatorView {
+extension MLNPagedIndicatorView {
 
     ///
     ///

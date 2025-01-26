@@ -1,5 +1,5 @@
 //
-//  MLNPageIndicatorView.swift
+//  MLNPagedIndicatorView.swift
 //  Melon Fashion UI
 //
 //  Created by Dimka Novikov on 29.12.2024.
@@ -13,18 +13,18 @@ import SwiftUI
 
 
 
-// MARK: - MLNPageIndicatorView
+// MARK: - MLNPagedIndicatorView
 
 ///
 ///
 ///
 @available(iOS 17.0, *)
-public struct MLNPageIndicatorView: View {
+public struct MLNPagedIndicatorView: View {
 
     // MARK: - Private properties
 
     private let axis: Axis
-    @Binding private var selectedIndicator: Int
+    @Binding private var selectedIndicator: Int?
     private let indicators: [Indicator]
 
     @Environment(\.pageIndicatorStyle) private var pageIndicatorStyle
@@ -59,7 +59,7 @@ public struct MLNPageIndicatorView: View {
     ///
     public init(
         axis: Axis = .horizontal,
-        selection: Binding<Int>,
+        selection: Binding<Int?>,
         indicators: () -> [Indicator]
     ) {
         self.axis = axis
