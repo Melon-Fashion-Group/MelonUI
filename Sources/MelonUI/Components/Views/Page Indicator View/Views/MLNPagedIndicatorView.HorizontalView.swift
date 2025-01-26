@@ -30,6 +30,7 @@ extension MLNPagedIndicatorView {
                             indicators[index].view
                                 .frame(width: style.size.width, height: style.size.height)
                                 .foregroundStyle(selectedIndicator == index ? style.colors.active : style.colors.inactive)
+                                .id(index)
                         }
                     }
                 }

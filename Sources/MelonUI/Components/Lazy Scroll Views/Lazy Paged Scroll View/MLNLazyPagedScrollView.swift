@@ -77,7 +77,7 @@ extension MLNLazyPagedScrollView {
         }
         .scrollBounceBehavior(.basedOnSize)
         .scrollIndicators(.never)
-        .scrollPosition(id: $selectedValue)
+        .scrollPosition(id: $selectedValue, anchor: .center)
         .scrollTargetBehavior(.paging)
     }
 
@@ -92,7 +92,7 @@ extension MLNLazyPagedScrollView {
         }
         .scrollBounceBehavior(.basedOnSize)
         .scrollIndicators(.never)
-        .scrollPosition(id: $selectedValue)
+        .scrollPosition(id: $selectedValue, anchor: .center)
         .scrollTargetBehavior(.paging)
     }
 }
