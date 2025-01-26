@@ -1,5 +1,5 @@
 //
-//  ShimeEffectModifier.swift
+//  ShineEffectViewModifier.swift
 //  Melon Fashion UI
 //
 //  Created by Dimka Novikov on 29.12.2024.
@@ -13,14 +13,13 @@ import SwiftUI
 
 
 
-// MARK: - ShimeEffectModifier
+// MARK: - ShineEffectViewModifier
 
 @available(iOS 17.0, *)
-struct ShimeEffectViewModifier: ViewModifier {
+struct ShineEffectViewModifier: ViewModifier {
     private let gradient: Gradient
-    private let animation: Animation
-
     private let min, max: CGFloat
+    private let animation: Animation
 
     @State private var isAnimated = true
 
@@ -29,20 +28,26 @@ struct ShimeEffectViewModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .mask(LinearGradient(gradient: gradient, startPoint: startPoint, endPoint: endPoint))
+            .mask { LinearGradient(gradient: gradient, startPoint: startPoint, endPoint: endPoint) }
             .onAppear { isAnimated = false }
             .animation(animation, value: isAnimated)
     }
 
     init(
-        gradient: Gradient,
+        type: MLNShineEffectLuminosityType,
         width: CGFloat,
         animation: Animation
     ) {
-        self.gradient = gradient
-        self.animation = animation
+        let gradient: Gradient = switch type {
+        case .dark(opacity: let opacity):
+                .init(colors: [.black.opacity(opacity), .black, .black.opacity(opacity)])
+        case .light(opacity: let opacity):
+                .init(colors: [.white, .white.opacity(opacity), .white])
+        }
 
+        self.gradient = gradient
         min = 0 - width
         max = 1 + width
+        self.animation = animation
     }
 }
