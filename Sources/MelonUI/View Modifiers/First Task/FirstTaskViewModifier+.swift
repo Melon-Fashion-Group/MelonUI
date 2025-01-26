@@ -25,7 +25,7 @@ extension View {
     @available(iOS 17.0, *)
     public func onFirstTask(
         priority: TaskPriority = .userInitiated,
-        action: @escaping () async -> Void
+        _ action: @escaping () async -> Void
     ) -> some View {
         modifier(FirstTaskViewModifier(priority: priority, action: action))
     }
