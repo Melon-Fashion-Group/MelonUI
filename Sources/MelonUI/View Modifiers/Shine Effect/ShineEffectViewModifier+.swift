@@ -23,7 +23,7 @@ extension View {
     ///
     ///
     @available(iOS 17.0, *)
-    public func shimeEffect(
+    public func shineEffect(
         type: MLNShineEffectLuminosityType = .dark(opacity: 0.3),
         width: CGFloat = 1,
         animation: Animation = .linear(duration: 2).repeatForever(autoreverses: false)
