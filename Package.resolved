@@ -1,13 +1,13 @@
 {
-  "originHash" : "e5365b2fe20d1682311d23ad1f58137601cf19539bde82821ab211bedc2f6e08",
+  "originHash" : "9d73c2a732cd91f8fe596afa1153b14d90b5e5592ec8ce2387120be2bf87106c",
   "pins" : [
     {
       "identity" : "melonkit",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Melon-Fashion-Group/MelonKit",
       "state" : {
-        "revision" : "8be44ec1e3e6523bf751735ef59bf1087fd7c383",
-        "version" : "0.38.0"
+        "revision" : "fcef6d60ff9619fad218854a1208e67ebb4b808d",
+        "version" : "0.40.0"
       }
     }
   ],
