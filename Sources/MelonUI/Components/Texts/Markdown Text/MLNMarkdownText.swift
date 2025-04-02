@@ -48,6 +48,16 @@ public struct MLNMarkdownText: View {
         attributedString = createAttributedString(from: components, with: separator)
     }
 
+    ///
+    ///
+    ///
+    public init(
+        separator: String = .empty,
+        _ components: [Component]
+    ) {
+        attributedString = createAttributedString(from: components, with: separator)
+    }
+
 
 
     // MARK: - Private properties
