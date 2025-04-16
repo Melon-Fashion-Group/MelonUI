@@ -1,0 +1,15 @@
+{
+  "originHash" : "c2a2c2dafabc68ef82af73c3c6a27d36c3b120d61b70b6d350fdd873973df897",
+  "pins" : [
+    {
+      "identity" : "melonkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Melon-Fashion-Group/MelonKit",
+      "state" : {
+        "revision" : "402405b12a0535ea5b2583e6bb8b7a1c64cb5912",
+        "version" : "1.0.0"
+      }
+    }
+  ],
+  "version" : 3
+}
