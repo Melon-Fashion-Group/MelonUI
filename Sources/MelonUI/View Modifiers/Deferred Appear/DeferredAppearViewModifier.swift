@@ -1,5 +1,5 @@
 //
-//  DelayedAppearViewModifier.swift
+//  DeferredAppearViewModifier.swift
 //  Melon Fashion UI
 //
 //  Created by Dimka Novikov on 25.04.2025.
@@ -14,10 +14,10 @@ import SwiftUI
 
 
 
-// MARK: - DelayedAppearViewModifier
+// MARK: - DeferredAppearViewModifier
 
 @available(iOS 17.0, *)
-struct DelayedAppearViewModifier: ViewModifier {
+struct DeferredAppearViewModifier: ViewModifier {
     private let delay: TimeInterval
     private let action: () -> Void
 
