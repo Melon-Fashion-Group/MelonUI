@@ -1,5 +1,5 @@
 //
-//  AppearViewModifier+.swift
+//  DelayedAppearViewModifier+.swift
 //  Melon Fashion UI
 //
 //  Created by Dimka Novikov on 25.04.2025.
@@ -23,7 +23,7 @@ extension View {
     ///
     ///
     @available(iOS 17.0, *)
-    public func onAppear(delay: TimeInterval, perform action: @escaping () -> Void) -> some View {
-        self.modifier(AppearViewModifier(delay: delay, action: action))
+    public func onDelayedAppear(delay: TimeInterval = 1, perform action: @escaping () -> Void) -> some View {
+        self.modifier(DelayedAppearViewModifier(delay: delay, action: action))
     }
 }
