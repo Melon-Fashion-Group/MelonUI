@@ -25,6 +25,7 @@ public struct MLNLazyTrackedScrollView<ID: Hashable, Content: View>: View {
 
     @Binding private var scrollID: ID?
     private let axis: MLNLazyScrollViewAxis
+    private let spacing: CGFloat
     private let anchor: UnitPoint
     private let content: Content
 
@@ -51,11 +52,13 @@ public struct MLNLazyTrackedScrollView<ID: Hashable, Content: View>: View {
     public init(
         id: Binding<ID?> = .constant(nil),
         axis: MLNLazyScrollViewAxis = .horizontal,
+        spacing: CGFloat = .zero,
         anchor: UnitPoint = .center,
         @ViewBuilder content: () -> Content
     ) {
         _scrollID = id
         self.axis = axis
+        self.spacing = spacing
         self.anchor = anchor
         self.content = content()
     }
@@ -68,7 +71,7 @@ public struct MLNLazyTrackedScrollView<ID: Hashable, Content: View>: View {
 extension MLNLazyTrackedScrollView {
     private var horizontalScrollView: some View {
         ScrollView(.horizontal) {
-            LazyHStack(spacing: .zero) {
+            LazyHStack(spacing: spacing) {
                 content
             }
             .scrollTargetLayout()
@@ -78,7 +81,7 @@ extension MLNLazyTrackedScrollView {
 
     private var verticalScrollView: some View {
         ScrollView(.vertical) {
-            LazyVStack(spacing: .zero) {
+            LazyVStack(spacing: spacing) {
                 content
             }
             .scrollTargetLayout()
