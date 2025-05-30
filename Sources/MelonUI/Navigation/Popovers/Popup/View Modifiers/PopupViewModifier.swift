@@ -30,14 +30,14 @@ struct PopupViewModifier: ViewModifier {
                 .flatMap { $0.windows }
                 .first(where: { $0.isKeyWindow })
 
-            if let window {
-                let view = Popup(isPresented: $store.isPresented) {
-                    removeChildVC(from: window)
-                } content: { store.view }
+            guard let rootViewController = window?.rootViewController else { return }
 
-                let viewController = UIHostingController(rootView: view)
-                addChildVC(viewController, to: window)
-            }
+            let view = Popup(isPresented: $store.isPresented) {
+                removeChildVC(from: rootViewController)
+            } content: { store.view }
+
+            let viewController = UIHostingController(rootView: view)
+            addChildVC(viewController, to: rootViewController)
         }
     }
 
@@ -45,25 +45,21 @@ struct PopupViewModifier: ViewModifier {
         self.store = store
     }
 
-    private func removeChildVC(from window: UIWindow) {
-        guard let viewController = window.rootViewController?.children
-            .first(where: { $0.title == identifier })
-        else { return }
+    private func removeChildVC(from rootViewController: UIViewController) {
+        guard let viewController = rootViewController.children.first(where: { $0.title == identifier }) else { return }
 
         viewController.view.removeFromSuperview()
         viewController.removeFromParent()
     }
 
-    private func addChildVC(_ viewController: UIViewController, to window: UIWindow) {
-        guard let rootViewController = window.rootViewController else { return }
-
+    private func addChildVC(_ viewController: UIViewController, to rootViewController: UIViewController) {
         viewController.title = identifier
 
         viewController.view.backgroundColor = .clear
         viewController.view.translatesAutoresizingMaskIntoConstraints = false
 
-        window.rootViewController?.view.addSubview(viewController.view)
-        window.rootViewController?.addChild(viewController)
+        rootViewController.view.addSubview(viewController.view)
+        rootViewController.addChild(viewController)
 
         NSLayoutConstraint.activate([
             viewController.view.topAnchor.constraint(equalTo: rootViewController.view.topAnchor),
