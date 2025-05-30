@@ -57,7 +57,7 @@ struct PopupViewModifier: ViewModifier {
     private func addChildVC(_ viewController: UIViewController, to window: UIWindow) {
         viewController.title = identifier
 
-        viewController.view.frame = window.rootViewController?.view.bounds ?? .zero
+//        viewController.view.frame = window.rootViewController?.view.bounds ?? .zero
         viewController.view.backgroundColor = .clear
         viewController.view.translatesAutoresizingMaskIntoConstraints = false
 
