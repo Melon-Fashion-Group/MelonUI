@@ -18,15 +18,14 @@ import SwiftUI
 extension MLNTabBar {
     struct ScaledViews: View {
         private let selectedIndex: Int
-        private let views: [(_: CGFloat) -> AnyView]
+        private let views: [AnyView]
         private let size: CGSize
-        private let topInset: CGFloat
         private let animation: Animation?
         
         var body: some View {
             ZStack {
                 ForEach(views.indices, id: \.self) { index in
-                    views[index](topInset)
+                    views[index]
                         .frame(width: size.width, height: size.height)
                         .zIndex(selectedIndex == index ? .init(views.count) : .zero)
                         .scaleEffect(selectedIndex == index ? .identity : .init(width: 0.99, height: 0.99))
@@ -38,15 +37,13 @@ extension MLNTabBar {
         
         init(
             selection: Int,
-            views: [(_: CGFloat) -> AnyView],
+            views: [AnyView],
             size: CGSize,
-            topInset: CGFloat,
             animation: Animation?
         ) {
             selectedIndex = selection
             self.views = views
             self.size = size
-            self.topInset = topInset
             self.animation = animation
         }
     }

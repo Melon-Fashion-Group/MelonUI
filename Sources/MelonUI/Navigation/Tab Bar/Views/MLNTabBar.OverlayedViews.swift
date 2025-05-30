@@ -18,9 +18,8 @@ import SwiftUI
 extension MLNTabBar {
     struct OverlayedViews: View {
         private let selectedIndex: Int
-        private let views: [(_: CGFloat) -> AnyView]
+        private let views: [AnyView]
         private let size: CGSize
-        private let topInset: CGFloat
         private let animation: Animation?
 
         var body: some View {
@@ -28,7 +27,7 @@ extension MLNTabBar {
                 ForEach(views.indices, id: \.self) { index in
                     let offset = computeOffset(by: index, with: size.width)
 
-                    views[index](topInset)
+                    views[index]
                         .frame(width: size.width, height: size.height)
                         .offset(x: offset)
                         .blur(radius: index < selectedIndex ? 10 : .zero)
@@ -39,15 +38,13 @@ extension MLNTabBar {
 
         init(
             selection: Int,
-            views: [(_: CGFloat) -> AnyView],
+            views: [AnyView],
             size: CGSize,
-            topInset: CGFloat,
             animation: Animation?
         ) {
             selectedIndex = selection
             self.views = views
             self.size = size
-            self.topInset = topInset
             self.animation = animation
         }
 

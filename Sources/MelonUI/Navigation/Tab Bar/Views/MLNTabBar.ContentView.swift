@@ -18,7 +18,7 @@ import SwiftUI
 extension MLNTabBar {
     struct ContentView: View {
         private let selectedTab: Int
-        private let views: [(_: CGFloat) -> AnyView]
+        private let views: [AnyView]
         private let topInset: CGFloat
         private let transition: Transition
         private let animation: Animation?
@@ -37,7 +37,7 @@ extension MLNTabBar {
 
         init(
             selection: Int,
-            views: [(_: CGFloat) -> AnyView],
+            views: [AnyView],
             topInset: CGFloat,
             transition: Transition,
             animation: Animation?
@@ -60,37 +60,13 @@ extension MLNTabBar.ContentView {
     private func multipleViews(size: CGSize) -> some View {
         switch transition {
         case .scale:
-            MLNTabBar.ScaledViews(
-                selection: selectedTab,
-                views: views,
-                size: size,
-                topInset: topInset,
-                animation: animation
-            )
+            MLNTabBar.ScaledViews(selection: selectedTab, views: views, size: size, animation: animation)
         case .slide:
-            MLNTabBar.SlidedViews(
-                selection: selectedTab,
-                views: views,
-                size: size,
-                topInset: topInset,
-                animation: animation
-            )
+            MLNTabBar.SlidedViews(selection: selectedTab, views: views, size: size, animation: animation)
         case .overlap:
-            MLNTabBar.OverlappedViews(
-                selection: selectedTab,
-                views: views,
-                size: size,
-                topInset: topInset,
-                animation: animation
-            )
+            MLNTabBar.OverlappedViews(selection: selectedTab, views: views, size: size, animation: animation)
         case .overlay:
-            MLNTabBar.OverlayedViews(
-                selection: selectedTab,
-                views: views,
-                size: size,
-                topInset: topInset,
-                animation: animation
-            )
+            MLNTabBar.OverlayedViews(selection: selectedTab, views: views, size: size, animation: animation)
         }
     }
 
@@ -98,7 +74,7 @@ extension MLNTabBar.ContentView {
     private func singleView(size: CGSize) -> some View {
         ZStack {
             ForEach(views.indices, id: \.self) { index in
-                views[index](topInset)
+                views[index]
                     .frame(width: size.width, height: size.height)
                     .zIndex(selectedTab == index ? .init(views.count) : .zero)
             }

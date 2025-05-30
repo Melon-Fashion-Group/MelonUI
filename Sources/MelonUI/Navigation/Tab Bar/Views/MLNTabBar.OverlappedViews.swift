@@ -18,9 +18,8 @@ import SwiftUI
 extension MLNTabBar {
     struct OverlappedViews: View {
         private let selectedIndex: Int
-        private let views: [(_: CGFloat) -> AnyView]
+        private let views: [AnyView]
         private let size: CGSize
-        private let topInset: CGFloat
         private let animation: Animation?
 
         var body: some View {
@@ -29,7 +28,7 @@ extension MLNTabBar {
                     let isFarView = index < selectedIndex
                     let isNearView = index > selectedIndex
 
-                    views[index](topInset)
+                    views[index]
                         .frame(width: size.width, height: size.height)
                         .scaleEffect(isNearView ? .init(width: 1.05, height: 1.05) : .identity)
                         .opacity(isNearView ? .zero : 1)
@@ -41,15 +40,13 @@ extension MLNTabBar {
 
         init(
             selection: Int,
-            views: [(_: CGFloat) -> AnyView],
+            views: [AnyView],
             size: CGSize,
-            topInset: CGFloat,
             animation: Animation?
         ) {
             selectedIndex = selection
             self.views = views
             self.size = size
-            self.topInset = topInset
             self.animation = animation
         }
     }
