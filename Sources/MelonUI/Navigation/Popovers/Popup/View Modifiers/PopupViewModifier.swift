@@ -55,13 +55,21 @@ struct PopupViewModifier: ViewModifier {
     }
 
     private func addChildVC(_ viewController: UIViewController, to window: UIWindow) {
+        guard let rootViewController = window.rootViewController else { return }
+
         viewController.title = identifier
 
-//        viewController.view.frame = window.rootViewController?.view.bounds ?? .zero
         viewController.view.backgroundColor = .clear
         viewController.view.translatesAutoresizingMaskIntoConstraints = false
 
         window.rootViewController?.view.addSubview(viewController.view)
         window.rootViewController?.addChild(viewController)
+
+        NSLayoutConstraint.activate([
+            viewController.view.topAnchor.constraint(equalTo: rootViewController.view.topAnchor),
+            viewController.view.leadingAnchor.constraint(equalTo: rootViewController.view.leadingAnchor),
+            viewController.view.trailingAnchor.constraint(equalTo: rootViewController.view.trailingAnchor),
+            viewController.view.bottomAnchor.constraint(equalTo: rootViewController.view.bottomAnchor)
+        ])
     }
 }
