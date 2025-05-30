@@ -19,6 +19,7 @@ extension MLNTabBar {
     struct TabView: View {
         @Binding private var selectedTab: Int
         private let tabs: [(image: Image, title: LocalizedStringKey?, badge: String?)]
+        private let bottomInset: CGFloat
         private let tabStyle: TabStyle
         private let badgeStyle: BadgeStyle
 
@@ -37,16 +38,19 @@ extension MLNTabBar {
                 }
             }
             .clipped()
+            .padding(.bottom, bottomInset)
         }
 
         init(
             selection: Binding<Int>,
             tabs: [(image: Image, title: LocalizedStringKey?, badge: String?)],
+            bottomInset: CGFloat,
             tabStyle: TabStyle,
             badgeStyle: BadgeStyle
         ) {
             _selectedTab = selection
             self.tabs = tabs
+            self.bottomInset = bottomInset
             self.tabStyle = tabStyle
             self.badgeStyle = badgeStyle
         }

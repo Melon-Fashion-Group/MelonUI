@@ -19,6 +19,7 @@ extension MLNTabBar {
     struct ContentView: View {
         private let selectedTab: Int
         private let views: [AnyView]
+        private let topInset: CGFloat
         private let transition: Transition
         private let animation: Animation?
 
@@ -37,11 +38,13 @@ extension MLNTabBar {
         init(
             selection: Int,
             views: [AnyView],
+            topInset: CGFloat,
             transition: Transition,
             animation: Animation?
         ) {
             selectedTab = selection
             self.views = views
+            self.topInset = topInset
             self.transition = transition
             self.animation = animation
         }

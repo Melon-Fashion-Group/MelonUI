@@ -56,27 +56,55 @@ public struct MLNTabBar: View {
         tabBarStyle.colors.background
             .ignoresSafeArea()
             .overlay {
-                ContentView(
-                    selection: selection.wrappedValue,
-                    views: store.tabs.map { $0.view },
-                    transition: tabBarStyle.transition,
-                    animation: tabBarStyle.animation
-                )
-                .padding(.bottom, 50)
-            }
-            .overlay(alignment: .bottom) {
-                TabView(
-                    selection: selection,
-                    tabs: store.tabs.map { ($0.icon, $0.title, $0.badge) },
-                    tabStyle: tabStyle,
-                    badgeStyle: badgeStyle
-                )
-                .frame(height: 50)
-                .background(tabBarStyle.colors.foreground)
-                .overlay(alignment: .top) {
-                    separatorView
+                GeometryReader { geometry in
+                    let topInset = geometry.safeAreaInsets.top
+                    let bottomInset = geometry.safeAreaInsets.bottom
+
+                    VStack(spacing: .zero) {
+                        ContentView(
+                            selection: selection.wrappedValue,
+                            views: store.tabs.map { $0.view },
+                            topInset: topInset,
+                            transition: tabBarStyle.transition,
+                            animation: tabBarStyle.animation
+                        )
+
+                        TabView(
+                            selection: selection,
+                            tabs: store.tabs.map { ($0.icon, $0.title, $0.badge) },
+                            bottomInset: bottomInset,
+                            tabStyle: tabStyle,
+                            badgeStyle: badgeStyle
+                        )
+                        .frame(height: 50 + bottomInset)
+                        .background(tabBarStyle.colors.foreground)
+                        .overlay(alignment: .top) { separatorView }
+                    }
+                    .ignoresSafeArea()
                 }
             }
+//            .overlay {
+//                ContentView(
+//                    selection: selection.wrappedValue,
+//                    views: store.tabs.map { $0.view },
+//                    transition: tabBarStyle.transition,
+//                    animation: tabBarStyle.animation
+//                )
+//                .padding(.bottom, 50)
+//            }
+//            .overlay(alignment: .bottom) {
+//                TabView(
+//                    selection: selection,
+//                    tabs: store.tabs.map { ($0.icon, $0.title, $0.badge) },
+//                    tabStyle: tabStyle,
+//                    badgeStyle: badgeStyle
+//                )
+//                .frame(height: 50)
+//                .background(tabBarStyle.colors.foreground)
+//                .overlay(alignment: .top) {
+//                    separatorView
+//                }
+//            }
     }
 
 
