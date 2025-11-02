@@ -55,7 +55,7 @@ public struct MLNAsyncVideoPlayer<Loader: View, Error: View>: View {
                     .onAppear(perform: completion)
             }
         }
-        .task(priority: .background) {
+        .onFirstTask(priority: .background) {
             await viewModel.load(with: request)
         }
     }
